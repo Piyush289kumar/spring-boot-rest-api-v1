@@ -2,10 +2,11 @@ package com.restcrudv1.util;
 
 import java.security.Key;
 import java.util.Date;
-
-import io.jsonwebtoken.Jwts;
+import org.springframework.stereotype.Component;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 
+@Component
 public class JwtUtil {
 	
 	private final String JWT_SECRET = "myjwtsecretkey";
