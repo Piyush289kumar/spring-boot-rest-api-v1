@@ -11,7 +11,7 @@ public class ApiResponse<T> {
 		private String message;
 		private T data;
 		
-		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM	-YYYY HH:mm:ss") 
+		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss") 
 		private LocalDateTime timestamp;
 		
 		public ApiResponse(boolean success, int status_code, String message, T data) {

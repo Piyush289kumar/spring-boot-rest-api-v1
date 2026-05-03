@@ -1,11 +1,16 @@
 package com.restcrudv1.security;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.restcrudv1.util.JwtUtil;
+
+import io.jsonwebtoken.Claims;
 
 import java.io.IOException;
 import jakarta.servlet.FilterChain;
@@ -36,9 +41,17 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 			
 			try {
 				
-				String email = jwtUtil.extractEmail(token);
+				Claims claims = jwtUtil.extractAllClaims(token);
+							
+				String email = claims.getSubject();
 				
-				var auth = new UsernamePasswordAuthenticationToken(email, null, null);
+				List<String> roles = claims.get("roles", List.class);
+				
+				List<SimpleGrantedAuthority> authorities = roles.stream()
+	                    .map(SimpleGrantedAuthority::new)
+	                    .collect(Collectors.toList());							
+				
+				var auth = new UsernamePasswordAuthenticationToken(email, null, authorities);
 				
 				SecurityContextHolder.getContext().setAuthentication(auth);				
 				

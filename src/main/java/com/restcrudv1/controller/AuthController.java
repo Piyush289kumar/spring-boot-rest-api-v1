@@ -29,14 +29,14 @@ public class AuthController {
 	
 	@PostMapping("/register")	
 	public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest req) {
-		auth_service.register(req.name, req.email, req.password);
+		auth_service.register(req.name, req.email, req.password, req.role);
 		return ResponseUtil.success(null, "User registered successfully.");
 	}
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@Valid @RequestBody LoginRequest req) {
 		var user = auth_service.login(req.email, req.password);
-		String token = jwt.generateToken(user.getUser_email());
+		String token = jwt.generateToken(user);
 		return ResponseUtil.success(new AuthResponse(token), "Login successful.");
 	}
 

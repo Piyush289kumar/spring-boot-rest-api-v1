@@ -24,4 +24,7 @@ public class RegisterRequest {
 		  message = "Password must contain uppercase, lowercase, number, and special character"
 	)
 	public String password;
+	
+	@NotBlank(message = "Role is required")
+	public String role;
 }
