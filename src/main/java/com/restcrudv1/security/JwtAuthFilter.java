@@ -47,6 +47,10 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 				
 				List<String> roles = claims.get("roles", List.class);
 				
+				if(roles == null) {
+					roles = List.of();
+				}
+				
 				List<SimpleGrantedAuthority> authorities = roles.stream()
 	                    .map(SimpleGrantedAuthority::new)
 	                    .collect(Collectors.toList());							
@@ -56,7 +60,7 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 				SecurityContextHolder.getContext().setAuthentication(auth);				
 				
 			}catch(Exception e) {
-				
+				System.out.println("JWT Error: " + e.getMessage());
 			}
 		}
 		

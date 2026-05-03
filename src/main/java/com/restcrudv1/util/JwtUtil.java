@@ -22,7 +22,7 @@ public class JwtUtil {
 	public String generateToken(User user) {
 		
 		return Jwts.builder()
-				.subject(user.getUser_email())
+				.subject(user.getEmail())
 				.claim("roles", user.getRoles()
 						.stream()
 						.map(Role::getName)

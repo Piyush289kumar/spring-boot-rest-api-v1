@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.restcrudv1.dto.response.ApiResponse;
+import com.restcrudv1.util.ResponseUtil;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -41,5 +42,5 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 				.body(new ApiResponse<>(false, 500, "Something went wrong.", null));
 	}
-	
+		
 }

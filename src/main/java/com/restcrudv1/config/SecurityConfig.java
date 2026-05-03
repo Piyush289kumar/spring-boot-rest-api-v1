@@ -2,6 +2,7 @@ package com.restcrudv1.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,6 +13,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.restcrudv1.security.JwtAuthFilter;
 
 @Configuration
+@EnableMethodSecurity
 public class SecurityConfig {
 	
 	private final JwtAuthFilter jwtFilter;
@@ -32,7 +34,8 @@ public class SecurityConfig {
 					
 					// everything under /api/** required auth
 					.requestMatchers("/admin/**").hasRole("OFFICER")
-					.requestMatchers("/user/**").hasAnyRole("USER", "CUSTOMER", "OFFICER")
+					.requestMatchers("/users/**").hasAnyRole("USER", "CUSTOMER", "OFFICER")
+					.requestMatchers("/users/me").authenticated()
 					
 					// anything else
 					.anyRequest().authenticated()					

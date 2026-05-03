@@ -78,7 +78,7 @@ public class User {
 	}
 
 
-	public String getUser_name() {
+	public String getName() {
 		return name;
 	}
 
@@ -88,7 +88,7 @@ public class User {
 	}
 
 
-	public String getUser_email() {
+	public String getEmail() {
 		return email;
 	}
 
