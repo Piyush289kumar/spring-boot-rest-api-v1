@@ -29,6 +29,7 @@ public class User {
 	
 	@Column(nullable = true)
 	private String password;
+		
 	
 	@Column(name = "is_active")
 	private boolean isActive = true;
@@ -135,8 +136,8 @@ public class User {
 
 	public User(String user_name, String user_email, String password, boolean isActive, LocalDateTime createdAt) {
 		super();
-		this.user_name = user_name;
-		this.user_email = user_email;
+		this.name = user_name;
+		this.email = user_email;
 		this.password = password;
 		this.isActive = isActive;
 		this.createdAt = createdAt;
@@ -145,7 +146,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", user_name=" + user_name + ", user_email=" + user_email + ", password=" + password
+		return "User [id=" + id + ", user_name=" + name + ", user_email=" + email + ", password=" + password
 				+ ", isActive=" + isActive + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", deletedAt="
 				+ deletedAt + "]";
 	}
