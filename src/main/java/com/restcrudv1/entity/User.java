@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users", indexes = {
-		@Index(name = "idx_email", columnList = "email", unique = true)
+		@Index(name = "idx_email", columnList = "user_email", unique = true)
 })
 public class User {
 
@@ -21,11 +21,11 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
-	private String user_name;
+	@Column(name = "user_name", nullable = false)
+	private String name;
 	
-	@Column(nullable = false, unique = true)
-	private String user_email;
+	@Column(name = "user_email", nullable = false, unique = true)
+	private String email;
 	
 	@Column(nullable = true)
 	private String password;

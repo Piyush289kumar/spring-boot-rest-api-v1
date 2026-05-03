@@ -9,7 +9,7 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtUtil {
 	
-	private final String JWT_SECRET = "myjwtsecretkey";
+	private final String JWT_SECRET = "myjwtsecretkey1234myjwtsecretkey1234";
 	private final Key key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes());
 	
 	public String generateToken(String email) {

@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class RestCrudV1Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(RestCrudV1Application.class, args);
-		System.out.println("Server is UP...");
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(RestCrudV1Application.class, args);
+        System.out.println(System.getProperty("spring.config.location"));
+        System.out.println("Server is UP...");
+    }
 }
