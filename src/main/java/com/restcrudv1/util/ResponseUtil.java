@@ -2,7 +2,7 @@ package com.restcrudv1.util;
 
 import org.springframework.http.ResponseEntity;
 
-import com.restcrudv1.dto.request.ApiResponse;
+import com.restcrudv1.dto.response.ApiResponse;
 
 public class ResponseUtil {
 

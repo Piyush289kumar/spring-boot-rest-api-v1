@@ -1,6 +1,8 @@
-package com.restcrudv1.dto.request;
-
+package com.restcrudv1.dto.response;
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 public class ApiResponse<T> {
 
@@ -8,6 +10,8 @@ public class ApiResponse<T> {
 		private int status_code;
 		private String message;
 		private T data;
+		
+		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-YYYY HH:mm:ss") 
 		private LocalDateTime timestamp;
 		
 		public ApiResponse(boolean success, int status_code, String message, T data) {
