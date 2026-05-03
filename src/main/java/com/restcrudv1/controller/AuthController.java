@@ -16,7 +16,7 @@ import com.restcrudv1.util.ResponseUtil;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 	
 	private final AuthService auth_service;
@@ -34,10 +34,10 @@ public class AuthController {
 	}
 	
 	@PostMapping("/login")
-	public AuthResponse login(@RequestBody LoginRequest req) {
+	public ResponseEntity<?> login(@Valid @RequestBody LoginRequest req) {
 		var user = auth_service.login(req.email, req.password);
 		String token = jwt.generateToken(user.getUser_email());
-		return new AuthResponse(token);
+		return ResponseUtil.success(new AuthResponse(token), "Login successful.");
 	}
 
 }

@@ -4,6 +4,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.restcrudv1.entity.User;
+import com.restcrudv1.exception.ApiException;
 import com.restcrudv1.repository.UserRepository;
 
 @Service
@@ -18,6 +19,11 @@ public class AuthService {
 	}
 	
 	public User register(String name, String email, String password) {
+		
+		if(repo.findByEmail(email).isPresent()) {
+			throw new ApiException("Email already registered.");
+		}
+		
 		User user = new User();
 		user.setUser_name(name);
 		user.setUser_email(email);
@@ -27,10 +33,10 @@ public class AuthService {
 	
 	public User login(String email, String password) {
 		User user = repo.findByEmail(email)
-				.orElseThrow(() -> new RuntimeException("User not found") );
+				.orElseThrow(() -> new ApiException("User not found") );
 		
 		if(!encoder.matches(password, user.getPassword())) {
-			throw new RuntimeException("Invalid password");
+			throw new ApiException("Invalid password");
 		}
 		
 		return user;
