@@ -1,5 +1,6 @@
 package com.restcrudv1.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,9 @@ import com.restcrudv1.dto.request.RegisterRequest;
 import com.restcrudv1.dto.response.AuthResponse;
 import com.restcrudv1.service.implementations.AuthService;
 import com.restcrudv1.util.JwtUtil;
+import com.restcrudv1.util.ResponseUtil;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -24,9 +28,9 @@ public class AuthController {
 	}
 	
 	@PostMapping("/register")	
-	public String register(@RequestBody RegisterRequest req) {
+	public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest req) {
 		auth_service.register(req.name, req.email, req.password);
-		return "User register successfully.";
+		return ResponseUtil.success(null, "User registered successfully.");
 	}
 	
 	@PostMapping("/login")
